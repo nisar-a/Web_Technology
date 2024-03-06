@@ -1,0 +1,48 @@
+.t1
+{
+    color:rgba(228, 15, 79, 0.678);
+    font-size: 25px;
+    font-style:italic;
+    width: 100%;
+}
+.s1
+{
+    color:rgba(15, 82, 228, 0.678);
+    font-size: 25px;
+    width: 100%;
+}
+.c1
+{
+    color:rgba(228, 15, 210, 0.678);
+    font-size: 25px;
+    width: 100%;
+}
+.t2
+{
+    color:rgba(228, 15, 22, 0.466);
+    font-size: 25px;
+    width: 100%;
+    font-style:serif;
+}
+.a1
+{
+    color:crimson;
+    font-size:25px;
+    width:100%;
+    font-style:italic;
+}
+
+.h1
+{
+    color:darkgoldenrod;
+    font-size:25px;
+    width:100%;
+    font-style:italic;
+}
+.p1
+{
+    color:indianred;
+    font-size:25px;
+    width:100%;
+    font-style:serif;
+}
