@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Validation</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 50;
+    padding: 50;
+    align-items: center;
+    height: 100%;
+  }
+
+  .container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+  }
+
+  .input-group {
+    margin-bottom: 15px;
+  }
+
+  .input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  .input-group input[type="text"],
+  .input-group input[type="email"],
+  .input-group input[type="password"],
+  .input-group input[type="radio"],
+  .input-group input[type="date"],
+  .input-group textarea,
+  .input-group select {
+    width: calc(100% - 22px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 5px;
+  }
+
+  .error {
+    color: red;
+    font-size: 0.8em;
+  }
+
+  .submit-btn, .clear-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  .submit-btn:hover, .clear-btn:hover {
+    background-color: #45a049;
+  }
+
+  .success-message {
+    color: green;
+    font-weight: bold;
+    text-align: center;
+  }
+  .input-group label.checkbox {
+    display: inline-block;
+    margin-right: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>Form Validation</h2>
+  <form id="myForm">
+    <div class="input-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name">
+      <span class="error" id="nameError"></span>
+    </div>
+    
+    <div class="input-group">
+      <label for="rollno">Roll No:</label>
+      <input type="text" id="rollno" name="rollno">
+      <span class="error" id="rollnoError"></span>
+    </div>
+    
+    <div class="input-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email">
+      <span class="error" id="emailError"></span>
+    </div>
+    
+    <div class="input-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password">
+      <span class="error" id="passwordError"></span>
+    </div>
+    
+    <div class="input-group">
+      <label>Gender:</label>
+      <label class="radio" for="male">
+        <input type="radio" id="male" name="gender" value="male"> Male
+      </label>
+      <label class="radio" for="female">
+        <input type="radio" id="female" name="gender" value="female"> Female
+      </label>
+      <label class="radio" for="other">
+        <input type="radio" id="other" name="gender" value="other"> Other
+      </label>
+      <span class="error" id="genderError"></span>
+    </div>
+    
+    <div class="input-group">
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" name="dob">
+      <span class="error" id="dobError"></span>
+    </div>
+    
+    <div class="input-group">
+      <label for="address">Address:</label>
+      <textarea id="address" name="address" rows="4"></textarea>
+      <span class="error" id="addressError"></span>
+    </div>
+    
+    <div class="input-group">
+      <label for="phone">Phone:</label>
+      <input type="text" id="phone" name="phone">
+      <span class="error" id="phoneError"></span>
+    </div>
+    
+    <div class="input-group">
+      <label for="interests">Interests:</label>
+      <div>
+        <label class="checkbox" for="music">
+          <input type="checkbox" id="music" name="interests" value="music"> Music
+        </label>
+        <label class="checkbox" for="sports">
+          <input type="checkbox" id="sports" name="interests" value="sports"> Sports
+        </label>
+        <label class="checkbox" for="others">
+          <input type="checkbox" id="others" name="interests" value="others"> Others
+        </label>
+      </div>
+      <span class="error" id="interestsError"></span>
+    </div>
+    
+    <div class="input-group">
+      <label for="courses">Courses:</label>
+      <select id="courses" name="courses">
+        <option value="">Select a course</option>
+        <option value="web">Web Development</option>
+        <option value="mobile">Mobile App Development</option>
+        <option value="data">Data Science</option>
+        <option value="design">Graphic Design</option>
+      </select>
+      <span class="error" id="coursesError"></span>
+    </div>
+    
+    <button type="button" class="submit-btn" onclick="validateForm()">Submit</button>
+    <button type="button" class="clear-btn" onclick="clearForm()">Clear</button>
+  </form>
+
+  <div id="successMessage" class="success-message" style="display: none;">
+    Thank you for your registration!
+  </div>
+</div>
+<script>
+function validateForm() {
+  var name = document.getElementById("name").value;
+  var rollno = document.getElementById("rollno").value; // New field
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
+  var phone = document.getElementById("phone").value;
+  var gender = document.querySelector('input[name="gender"]:checked');
+  var dob = document.getElementById("dob").value;
+  var address = document.getElementById("address").value;
+  var interests = document.querySelectorAll('input[name="interests"]:checked');
+  var courses = document.getElementById("courses").value;
+  var genderError = document.getElementById("genderError");
+  var dobError = document.getElementById("dobError");
+  var nameError = document.getElementById("nameError");
+  var emailError = document.getElementById("emailError");
+  var passwordError = document.getElementById("passwordError");
+  var phoneError = document.getElementById("phoneError");
+  var addressError = document.getElementById("addressError");
+  var interestsError = document.getElementById("interestsError");
+  var coursesError = document.getElementById("coursesError");
+  var rollnoError = document.getElementById("rollnoError"); // New field
+  var successMessage = document.getElementById("successMessage");
+  var isValid = true;
+
+  nameError.innerHTML = "";
+  emailError.innerHTML = "";
+  passwordError.innerHTML = "";
+  phoneError.innerHTML = "";
+  genderError.innerHTML = "";
+  dobError.innerHTML = "";
+  addressError.innerHTML = "";
+  interestsError.innerHTML = "";
+  coursesError.innerHTML = "";
+  rollnoError.innerHTML = ""; // New field
+
+  var nameRegex = /^[A-Z][a-zA-Z._]*$/; 
+  if (name.trim() === "") {
+    nameError.innerHTML = "Name is required";
+    isValid = false;
+  } else if (!nameRegex.test(name)) {
+    nameError.innerHTML = "Name must start with a capital letter and can only contain alphabets, periods, and underscores";
+    isValid = false;
+  }
+
+  // Validate Roll No
+  var rollnoRegex = /^\d{2}[a-zA-Z]*\d{3}$/; // New field
+  if (rollno.trim() === "") {
+    rollnoError.innerHTML = "Roll No is required";
+    isValid = false;
+  } else if (!rollnoRegex.test(rollno)) {
+    rollnoError.innerHTML = "Roll No must start with two digits, contain alphabets and/or digits, and end with two digits";
+    isValid = false;
+  }
+
+  if (email.trim() === "") {
+    emailError.innerHTML = "Email is required";
+    isValid = false;
+  } else if (!isValidEmail(email)) {
+    emailError.innerHTML = "Please enter a valid email address";
+    isValid = false;
+  }
+
+  var passwordRegex = /^(?=.*[!@#$%^&*])(?=.*[a-zA-Z0-9]).{8,}$/; 
+  if (password.trim() === "") {
+    passwordError.innerHTML = "Password is required";
+    isValid = false;
+  } else if (!passwordRegex.test(password)) {
+    passwordError.innerHTML = "Password must contain at least one special character, one letter, one digit, and be 8 characters long";
+    isValid = false;
+  }
+
+  var phoneRegex = /^\d{10}$/; 
+  if (phone.trim() === "") {
+    phoneError.innerHTML = "Phone number is required";
+    isValid = false;
+  } else if (!phoneRegex.test(phone)) {
+    phoneError.innerHTML = "Please enter a valid 10-digit phone number";
+    isValid = false;
+  }
+
+  if (!gender) {
+    genderError.innerHTML = "Please select a gender";
+    isValid = false;
+  }
+
+  if (dob.trim() === "") {
+    dobError.innerHTML = "Date of birth is required";
+    isValid = false;
+  }
+
+  if (address.trim() === "") {
+    addressError.innerHTML = "Address is required";
+    isValid = false;
+  }
+
+  if (interests.length === 0) {
+    interestsError.innerHTML = "Please select at least one interest";
+    isValid = false;
+  }
+
+  if (courses === "") {
+    coursesError.innerHTML = "Please select a course";
+    isValid = false;
+  }
+
+  if (isValid) {
+    successMessage.style.display = "block";
+    document.getElementById("myForm").reset(); 
+  }
+
+  return isValid;
+}
+
+function isValidEmail(email) {
+ 
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+function clearForm() {
+  document.getElementById("myForm").reset();
+  var nameError = document.getElementById("nameError");
+  var emailError = document.getElementById("emailError");
+  var passwordError = document.getElementById("passwordError");
+  var phoneError = document.getElementById("phoneError");
+  var genderError = document.getElementById("genderError");
+  var dobError = document.getElementById("dobError");
+  var addressError = document.getElementById("addressError");
+  var interestsError = document.getElementById("interestsError");
+  var coursesError = document.getElementById("coursesError");
+  var rollnoError = document.getElementById("rollnoError"); // New field
+  var successMessage = document.getElementById("successMessage");
+  nameError.innerHTML = "";
+  emailError.innerHTML = "";
+  passwordError.innerHTML = "";
+  phoneError.innerHTML = "";
+  genderError.innerHTML = "";
+  dobError.innerHTML = "";
+  addressError.innerHTML = "";
+  interestsError.innerHTML = "";
+  coursesError.innerHTML = "";
+  rollnoError.innerHTML = ""; // New field
+  successMessage.style.display = "none";
+}
+</script>
+</body>
+</html>
