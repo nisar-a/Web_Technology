@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login Page</title>
+    </head>
+    <body>
+        <center>
+            <form action="http://localhost:8000" method="get">
+                <h1 style="color: tan;">Form</h1>
+                <table border="2">
+                    <tr>
+                        <td>Enter your name:</td>
+                        <td><input type="text" name="name" placeholder="Enter your name"></td>
+                    </tr>
+                    <tr>
+                        <td>Choose the gender:</td>
+                        <td>
+                            Male <input type="radio" name="gender" value="Male">
+                            Female <input type="radio" name="gender" value="Female">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Enter your email:</td>
+                        <td><input type="email" name="mail" placeholder="Enter your email" required></td>
+                    </tr>
+                    <tr>
+                        <td>Address:</td>
+                        <td><textarea name="address" cols="30" rows="5"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Mobile No:</td>
+                        <td><input type="number" name="number" required></td>
+                    </tr>
+                    <tr>
+                        <td>State:</td>
+                        <td>
+                            <select name="State">
+                                <option value="NONE">Select the State</option>
+                                <option value="TN">Tamilnadu</option>
+                                <option value="KL">Kerala</option>
+                                <option value="KN">Karnataka</option>
+                                <option value="MUM">Mumbai</option>
+                                <option value="GOA">Goa</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>I agree to all the above details:</td>
+                        <td>
+                            <input type="checkbox" name="checkbox" value="OK"> I agree
+                        </td>
+                    </tr>
+                </table>
+                <br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </center>
+    </body>
+</html>
