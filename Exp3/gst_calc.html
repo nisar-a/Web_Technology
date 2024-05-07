@@ -1,0 +1,125 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>
+            GST CALCULATOR
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./bootstrap-5.3.3-dist/css/bootstrap-reboot.min.css">
+        <script src="./bootstrap-5.3.3-dist/js/bootstrap.bundle.js"></script>
+        <link rel="stylesheet" href="gst.css">
+    </head>
+            <body style="background-color: aliceblue;padding: 25px;">
+        <div class="head";>
+            <center>
+                <h3 style="color:burlywood;text-decoration-line:underline;">GST CALCULATOR</h3>
+            </center>
+        </div>
+        <center>
+            <table>
+                <div class="form" style="text-align: center;">
+                    <form method="post;" style="text-align: center;">
+                        <tr>
+                            <td><label for="gstno">Enter your GST ID:</label></td>
+                            <td><input type="text" name="gstno" id="gstno" placeholder="Enter the GST NO" required><br></td>
+                        </tr>
+                        <tr>
+                            <td><label for="cusadd">Enter the CUStomer address:</label></td>
+                            <td><textarea style=vertical-align:top id="cusadd" placeholder="Enter the address"></textarea><br></td>
+                        </tr>
+                        <tr>
+                            <td><label for="prod">Product:</label></td>
+                            <td>
+                                <select id="prod" name="prod">
+                                    <option value="none" selected disabled hidden>Select the items</option> 
+                                    <option value="Educational products">Educational products</option>
+                                    <option value="Vegetables">Vegetables</option>
+                                    <option value="Fruits">Fruits</option>
+                                    <option value="Drinks">Drinks</option>
+                                    <option value="Batteries & Wires">Batteries & Wires</option>
+                                    <option value="Home products">Home products</option>
+                                    <option value="Pooja items">Pooja items</option>
+                                    <option value="Decorative items">Decorative items</option>
+                                    <option value="Perfumes">Perfumes</option>
+                                </select><br>
+                            </td>  
+                        </tr>
+                        <tr>
+                            <td><label for="Quan">Quantity:</label></td>
+                            <td><input type="number" max="10" name="Quan" id="Quan" placeholder="Enter the quantity"required><br></td>
+                        </tr>
+                        <tr>
+                            <td><label for="prometh">Purchase method:</label></td>
+                            <td><select id="prometh" name="prometh" >
+                                    <option value="none" selected disabled hidden>Select the cashing method</option>
+                                    <option value="cash">Cash</option>
+                                    <option value="UPI">UPI</option>
+                                </select><br></td>
+                        </tr>
+                        <tr>
+                            <td><button type="reset" class="btn">clear</button></td>
+                            <td><button type="submit" class="btn">Submit</button></td>
+                        </tr>
+                     </form>
+                </div>
+            </table>
+            <div class="gst" id="gst"></div>
+            <div class="pur" id="pur"></div>
+            <div id="Quan1"></div>
+            <div class="product-price" id="prodPrice"></div>
+            <div class="total-price" id="totalPrice"></div>
+
+        </center>
+        <script type="text/javascript">
+            function calculateGST() {
+                let product = document.getElementById("prod").value;
+                let quantity = parseFloat(document.getElementById("Quan").value);
+                let purchaseMethod = document.getElementById("prometh").value;
+        
+                const productPrices = {
+                    'Educational products': 100, 
+                    'Vegetables': 50,
+                    'Fruits': 60,
+                    'Drinks': 80,
+                    'Batteries & Wires': 120,
+                    'Pooja items': 90,
+                    'Decorative items': 150
+                };
+        
+                const gstRates = {
+                    'Educational products': 12,
+                    'Vegetables': 5,
+                    'Fruits': 5,
+                    'Drinks': 18,
+                    'Batteries & Wires': 18,
+                    'Pooja items': 12,
+                    'Decorative items': 28
+                };
+        
+                let productPrice = productPrices[product] * quantity;
+                let gstAmount = (gstRates[product] / 100) * productPrice;
+        
+                if (purchaseMethod === "cash") {
+                    gstAmount *= 0.95;
+                }
+        
+                let totalPrice = productPrice + gstAmount;
+        
+                document.getElementById("gst").innerText = "GST Amount: ₹" + gstAmount.toFixed(2);
+                document.getElementById("prodPrice").innerText = "Product Price: ₹" + productPrice.toFixed(2);
+                document.getElementById("totalPrice").innerText = "Total Price: ₹" + totalPrice.toFixed(2);
+        
+                let p = document.getElementById("prod").value;
+                let q = document.getElementById("Quan").value;
+                document.getElementById("pur").innerHTML = "Product: " + p;
+                document.getElementById("Quan1").innerHTML = "Quantity: " + q;
+            }
+        
+            document.querySelector("form").addEventListener("submit", function(event) {
+                event.preventDefault();
+                calculateGST();
+            });
+        </script>
+         
+    </body>
+</html>
