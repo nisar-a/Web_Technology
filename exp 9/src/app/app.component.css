@@ -1,0 +1,65 @@
+/* app.component.css */
+
+form {
+    max-width: 600px;
+    margin: auto;
+    padding: 1em;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  td {
+    padding: 0.5em;
+    vertical-align: top;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="radio"],
+  input[type="checkbox"],
+  select {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  input[type="radio"],
+  input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5em;
+  }
+  
+  button {
+    padding: 0.5em 2em;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+  }
+  
+  b {
+    display: block;
+    margin-top: 0.5em;
+  }
+  
+  b div {
+    display: inline;
+  }
+  

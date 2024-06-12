@@ -1,0 +1,75 @@
+<form [formGroup]="frm" (ngSubmit)="onSubmit()">
+  <h1 style="color: blueviolet;text-align: center;"><u>Form Validation</u></h1>
+  <table>
+    <tr>
+      <td><label for="firstname">First Name</label></td>
+      <td>
+        <input type="text" id="firstname" name="firstname" formControlName="firstname">
+        <ng-container *ngIf="frm.get('firstname')?.invalid && frm.get('firstname')!.dirty">
+          <div style="color: red"><b>Please enter valid data</b></div>
+          <div *ngIf="frm.get('firstname')!.errors?.['required']" style="color: blue"><b>This field is required</b></div>
+          <div *ngIf="frm.get('firstname')!.errors?.['pattern']" style="color: blue"><b>First name must contain at least one uppercase letter and be at least 8 characters long</b></div>
+        </ng-container>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="lastname">Last Name</label></td>
+      <td>
+        <input type="text" id="lastname" name="lastname" formControlName="lastname">
+        <ng-container *ngIf="frm.get('lastname')?.invalid && frm.get('lastname')!.dirty">
+          <div *ngIf="frm.get('lastname')!.errors?.['required']" style="color: blue"><b>This field is required</b></div>
+          <div *ngIf="frm.get('lastname')!.errors?.['minlength']" style="color: blue"><b>Last name must be at least 2 characters long</b></div>
+        </ng-container>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="email">Email</label></td>
+      <td>
+        <input type="text" id="email" name="email" formControlName="emailid">
+        <ng-container *ngIf="frm.get('emailid')?.invalid && frm.get('emailid')!.dirty">
+          <div *ngIf="frm.get('emailid')!.errors?.['required']" style="color: blue"><b>This field is required</b></div>
+          <div *ngIf="frm.get('emailid')!.errors?.['email']" style="color: blue"><b>Enter a valid email address</b></div>
+        </ng-container>
+      </td>
+    </tr>
+    <tr>
+      <td><label>Gender</label></td>
+      <td>
+        <input type="radio" value="male" id="gender-male" name="gender" formControlName="gender"> Male
+        <input type="radio" value="female" id="gender-female" name="gender" formControlName="gender"> Female
+        <ng-container *ngIf="frm.get('gender')?.invalid && frm.get('gender')!.dirty">
+          <div *ngIf="frm.get('gender')!.errors?.['required']" style="color: blue"><b>Please select a gender</b></div>
+        </ng-container>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="country">Country</label></td>
+      <td>
+        <select id="country" name="country" formControlName="country">
+          <option *ngFor="let country of countryList" [value]="country.id">{{ country.name }}</option>
+        </select>
+        <ng-container *ngIf="frm.get('country')?.invalid && frm.get('country')!.dirty">
+          <div *ngIf="frm.get('country')!.errors?.['required']" style="color: blue"><b>Please select a country</b></div>
+        </ng-container>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="isverified">Verified the details</label></td>
+      <td>
+        <input type="checkbox" id="isverified" name="isverified" formControlName="isverified">
+        <ng-container *ngIf="frm.get('isverified')?.invalid && frm.get('isverified')!.dirty">
+          <div *ngIf="frm.get('isverified')!.errors?.['required']" style="color: blue"><b>You must verify the details</b></div>
+        </ng-container>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <button type="submit" [disabled]="!frm.valid">Submit</button>
+      </td>
+    </tr>
+  </table>
+</form>
+
+<pre>{{ msg }}</pre>
+
+<router-outlet></router-outlet>
